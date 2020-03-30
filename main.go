@@ -12,6 +12,7 @@ func main() {
 	http.HandleFunc("/zc",hello)
 
 	http.ListenAndServe(":8080",nil)
+	//12
 
 
 	//p("ChitChat", version(), "started at", config.Address)
@@ -27,22 +28,22 @@ func main() {
 	////
 	//
 	//// index
-	//mux.HandleFunc("/", index)
+	//mux.HandleFunc("/", route.index)
 	//// error
-	//mux.HandleFunc("/err", err)
+	//mux.HandleFunc("/err", route.err)
 	//
 	//// defined in route_auth.go
-	//mux.HandleFunc("/login", login)
-	//mux.HandleFunc("/logout", logout)
-	//mux.HandleFunc("/signup", signup)
-	//mux.HandleFunc("/signup_account", signupAccount)
-	//mux.HandleFunc("/authenticate", authenticate)
+	//mux.HandleFunc("/login", route.login)
+	//mux.HandleFunc("/logout", route.logout)
+	//mux.HandleFunc("/signup", route.signup)
+	//mux.HandleFunc("/signup_account", route.signupAccount)
+	//mux.HandleFunc("/authenticate", route.authenticate)
 	//
 	//// defined in route_thread.go
-	//mux.HandleFunc("/thread/new", newThread)
-	//mux.HandleFunc("/thread/create", createThread)
-	//mux.HandleFunc("/thread/post", postThread)
-	//mux.HandleFunc("/thread/read", readThread)
+	//mux.HandleFunc("/thread/new", route.newThread)
+	//mux.HandleFunc("/thread/create", route.createThread)
+	//mux.HandleFunc("/thread/post", route.postThread)
+	//mux.HandleFunc("/thread/read", route.readThread)
 	//
 	//// starting up the server
 	//server := &http.Server{
