@@ -1,0 +1,16 @@
+{
+  "goblog": {
+    "ip": "106.75.77.87",
+    "user": "root",
+    "password": "123456",
+    "port": "3306",
+    "database": "test"
+  },
+  "goblog_test": {
+    "ip": "127.0.0.1",
+    "user": "root",
+    "password": "",
+    "port": "3306",
+    "database": "test"
+  }
+}

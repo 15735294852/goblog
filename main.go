@@ -2,62 +2,40 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"goblog/util/configure"
 )
+
+
+// 数据库配置
+type DbConfig struct {
+	Goblog *SingleConfig `json:"goblog"`
+	Goblog_test     *SingleConfig `json:"goblog_test"`
+}
+type SingleConfig struct {
+	Ip       string `json:"ip"`
+	User     string `json:"user"`
+	Password string `json:"password"`
+	Port     string `json:"port"`
+	Database string `json:"database"`
+}
+
+func init()  {
+	fmt.Println("test")
+}
 
 func main() {
 
+	//+++++++++获取配置相关 start +++++++++++++++++++//
+	conf := DbConfig{}
+	configure.ReadConf(&conf, "databases.json")
+	fmt.Printf("%s",conf.Goblog.Password)
+	//+++++++++获取配置相关 end ++++++++++++++++++++//
+
+	//+++++++++日志相关 start +++++++++++++++++++//
+
+	//+++++++++日志相关 end ++++++++++++++++++++//
 
 
-	http.HandleFunc("/zc",hello)
 
-	http.ListenAndServe(":8080",nil)
-	//12
-
-
-	//p("ChitChat", version(), "started at", config.Address)
-	//
-	//// handle static assets
-	//mux := http.NewServeMux()
-	//files := http.FileServer(http.Dir(config.Static))
-	//mux.Handle("/static/", http.StripPrefix("/static/", files))
-	//
-	////
-	//// all route patterns matched here
-	//// route handler functions defined in other files
-	////
-	//
-	//// index
-	//mux.HandleFunc("/", route.index)
-	//// error
-	//mux.HandleFunc("/err", route.err)
-	//
-	//// defined in route_auth.go
-	//mux.HandleFunc("/login", route.login)
-	//mux.HandleFunc("/logout", route.logout)
-	//mux.HandleFunc("/signup", route.signup)
-	//mux.HandleFunc("/signup_account", route.signupAccount)
-	//mux.HandleFunc("/authenticate", route.authenticate)
-	//
-	//// defined in route_thread.go
-	//mux.HandleFunc("/thread/new", route.newThread)
-	//mux.HandleFunc("/thread/create", route.createThread)
-	//mux.HandleFunc("/thread/post", route.postThread)
-	//mux.HandleFunc("/thread/read", route.readThread)
-	//
-	//// starting up the server
-	//server := &http.Server{
-	//	Addr:           config.Address,
-	//	Handler:        mux,
-	//	ReadTimeout:    time.Duration(config.ReadTimeout * int64(time.Second)),
-	//	WriteTimeout:   time.Duration(config.WriteTimeout * int64(time.Second)),
-	//	MaxHeaderBytes: 1 << 20,
-	//}
-	//server.ListenAndServe()
-}
-
-func hello(w http.ResponseWriter, r *http.Request) {
-
-	fmt.Fprintf(w,"Hello Docker Form Golang!")
 
 }
