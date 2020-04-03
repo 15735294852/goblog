@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"goblog/util/configure"
+	"goblog/util/logger"
 )
 
 
@@ -20,7 +21,7 @@ type SingleConfig struct {
 }
 
 func init()  {
-	fmt.Println("test")
+	//fmt.Println("test")
 }
 
 func main() {
@@ -32,6 +33,10 @@ func main() {
 	//+++++++++获取配置相关 end ++++++++++++++++++++//
 
 	//+++++++++日志相关 start +++++++++++++++++++//
+
+	logger.LogVar.Error().Msg("error 日志级别测试")
+	logger.LogVar.Debug().Msg("debug 日志级别测试")
+	logger.LogVar.Fatal().Msg("fatal 日志级别测试")
 
 	//+++++++++日志相关 end ++++++++++++++++++++//
 
