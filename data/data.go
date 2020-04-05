@@ -3,21 +3,47 @@ package data
 import (
 	"crypto/rand"
 	"crypto/sha1"
-	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
+	"github.com/beego/orm"
+	_ "github.com/go-sql-driver/mysql"
+	"goblog/util/configure"
 	"log"
 )
 
-var Db *sql.DB
+// 数据库配置
+type DbConfig struct {
+	Goblog      *SingleConfig `json:"goblog"`
+	Goblog_test *SingleConfig `json:"goblog_test"`
+}
+
+type SingleConfig struct {
+	Host       string `json:"host"`
+	User     string `json:"user"`
+	Password string `json:"password"`
+	Port     string `json:"port"`
+	Database string `json:"database"`
+	Character string `json:"character"`
+}
+
+var DB orm.Ormer
 
 func init() {
-	var err error
-	Db, err = sql.Open("postgres", "dbname=chitchat sslmode=disable")
-	if err != nil {
-		log.Fatal(err)
-	}
-	return
+	conf := DbConfig{}
+	configure.ReadConf(&conf, "databases.json")
+
+	host := conf.Goblog_test.Host
+	port := conf.Goblog_test.Port
+	user := conf.Goblog_test.User
+	password := conf.Goblog_test.Password
+	database := conf.Goblog_test.Database
+	character := conf.Goblog_test.Character
+
+	dataSource := user+":"+password+"@tcp("+host+":"+port+")/"+database+"?charset="+character
+	//注册驱动
+	orm.RegisterDriver("mysql", orm.DRMySQL)
+	// set default database
+	orm.RegisterDataBase("default", "mysql", dataSource, 30)
+	DB = orm.NewOrm()
 }
 
 // create a random UUID with from RFC 4122

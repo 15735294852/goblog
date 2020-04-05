@@ -23,11 +23,13 @@ func ReadConf(config interface{}, fileName string) error {
 
 	var err error
 	execpath, err := os.Executable()//获取程序路径
+
 	if err != nil {
 		return err
 	}
 
 	var fileFullPath = filepath.Join(filepath.Dir(execpath), "./" + CONFDIRNAME + "/" + fileName)//格式化处理文件路径
+
 	configor.Load(config,fileFullPath)
 	if err != nil {
 		return err

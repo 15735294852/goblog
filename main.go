@@ -2,16 +2,18 @@ package main
 
 import (
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
+	"goblog/data"
 	"goblog/util/configure"
 	"goblog/util/logger"
 )
 
-
 // 数据库配置
 type DbConfig struct {
-	Goblog *SingleConfig `json:"goblog"`
-	Goblog_test     *SingleConfig `json:"goblog_test"`
+	Goblog      *SingleConfig `json:"goblog"`
+	Goblog_test *SingleConfig `json:"goblog_test"`
 }
+
 type SingleConfig struct {
 	Ip       string `json:"ip"`
 	User     string `json:"user"`
@@ -20,16 +22,14 @@ type SingleConfig struct {
 	Database string `json:"database"`
 }
 
-func init()  {
-	//fmt.Println("test")
-}
 
 func main() {
-
+	article := new(data.Articles)
+	article.Insert()
 	//+++++++++获取配置相关 start +++++++++++++++++++//
 	conf := DbConfig{}
 	configure.ReadConf(&conf, "databases.json")
-	fmt.Printf("%s",conf.Goblog.Password)
+	fmt.Printf("%s", conf.Goblog.Password)
 	//+++++++++获取配置相关 end ++++++++++++++++++++//
 
 	//+++++++++日志相关 start +++++++++++++++++++//
@@ -39,8 +39,5 @@ func main() {
 	logger.LogVar.Fatal().Msg("fatal 日志级别测试")
 
 	//+++++++++日志相关 end ++++++++++++++++++++//
-
-
-
 
 }
