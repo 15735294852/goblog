@@ -1,4 +1,1 @@
-{"level":"error","caller":"/Users/xiaoshuai/go/src/goblog/main.go:35","time":"2020-04-03T16:55:16+08:00","message":"meg 日志级别测试"}
-{"level":"error","caller":"/Users/xiaoshuai/go/src/goblog/main.go:37","time":"2020-04-03T17:08:34+08:00","message":"error 日志级别测试"}
-{"level":"debug","caller":"/Users/xiaoshuai/go/src/goblog/main.go:38","time":"2020-04-03T17:08:34+08:00","message":"debug 日志级别测试"}
-{"level":"fatal","caller":"/Users/xiaoshuai/go/src/goblog/main.go:39","time":"2020-04-03T17:08:34+08:00","message":"fatal 日志级别测试"}
+
