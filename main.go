@@ -2,41 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/beego/orm"
-	_ "github.com/go-sql-driver/mysql"
-	_ "goblog/model"
 	"goblog/model/blog"
 )
 
-// 数据库配置
-type DbConfig struct {
-	Goblog      *SingleConfig `json:"goblog"`
-	Goblog_test *SingleConfig `json:"goblog_test"`
-}
-
-type SingleConfig struct {
-	Ip       string `json:"ip"`
-	User     string `json:"user"`
-	Password string `json:"password"`
-	Port     string `json:"port"`
-	Database string `json:"database"`
-}
-
-
 func main() {
-
-	o := orm.NewOrm()
-	orm.Debug = true
-	o.Using("online")
 	artcle := new(blog.Articles)
 
 	artcle.UserId = 0
 	artcle.Title = "第一篇文章"
-
-	articleId,err := o.Insert(artcle)
-	if err != nil {
-		fmt.Printf("%s", err)
-	}
+	articleId := artcle.Insert()
 
 	fmt.Println(articleId)
 

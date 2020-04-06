@@ -23,7 +23,7 @@ type SingleConfig struct {
 
 var DB orm.Ormer
 
-func init() {
+func InitDB() {
 	conf := DbConfig{}
 	configure.ReadConf(&conf, "databases.json")
 
