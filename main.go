@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
-	"goblog/data"
-	"goblog/util/configure"
-	"goblog/util/logger"
+	_ "goblog/model"
+	"goblog/model/blog"
 )
 
 // 数据库配置
@@ -24,19 +24,35 @@ type SingleConfig struct {
 
 
 func main() {
-	article := new(data.Articles)
-	article.Insert()
+
+	o := orm.NewOrm()
+	orm.Debug = true
+	o.Using("online")
+	artcle := new(blog.Articles)
+
+	artcle.UserId = 0
+	artcle.Title = "第一篇文章"
+
+	articleId,err := o.Insert(artcle)
+	if err != nil {
+		fmt.Printf("%s", err)
+	}
+
+	fmt.Println(articleId)
+
+	//article := new(data.Articles)
+	//article.Insert()
 	//+++++++++获取配置相关 start +++++++++++++++++++//
-	conf := DbConfig{}
-	configure.ReadConf(&conf, "databases.json")
-	fmt.Printf("%s", conf.Goblog.Password)
+	//conf := DbConfig{}
+	//configure.ReadConf(&conf, "databases.json")
+	//fmt.Printf("%s", conf.Goblog.Password)
 	//+++++++++获取配置相关 end ++++++++++++++++++++//
 
 	//+++++++++日志相关 start +++++++++++++++++++//
 
-	logger.LogVar.Error().Msg("error 日志级别测试")
-	logger.LogVar.Debug().Msg("debug 日志级别测试")
-	logger.LogVar.Fatal().Msg("fatal 日志级别测试")
+	//logger.LogVar.Error().Msg("error 日志级别测试")
+	//logger.LogVar.Debug().Msg("debug 日志级别测试")
+	//logger.LogVar.Fatal().Msg("fatal 日志级别测试")
 
 	//+++++++++日志相关 end ++++++++++++++++++++//
 
