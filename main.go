@@ -40,7 +40,7 @@ func main() {
 
 	fmt.Println(articleId)
 
-	//article := new(data.Articles)
+	//article := new(controller.Articles)
 	//article.Insert()
 	//+++++++++获取配置相关 start +++++++++++++++++++//
 	//conf := DbConfig{}
