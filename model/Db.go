@@ -1,11 +1,9 @@
 package model
 
 import (
-	"fmt"
 	"github.com/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	"goblog/util/configure"
-	"os"
 )
 
 // 数据库配置
@@ -45,8 +43,7 @@ func InitDB() {
 
 	//dataSource := user+":"+password+"@tcp("+host+":"+port+")/"+database+"?charset="+character
 	dataSource2 := user2+":"+password2+"@tcp("+host2+":"+port2+")/"+database2+"?charset="+character2
-	fmt.Printf("%s",dataSource2)
-	os.Exit(1)
+
 	//注册驱动
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	// set default database
