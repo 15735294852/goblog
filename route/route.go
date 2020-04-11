@@ -5,9 +5,12 @@ import (
 	"net/http"
 )
 
+
 func Route()  {
+
 	//路由
 	mux := http.NewServeMux()
+
 	//前端页面
 	files := http.FileServer(http.Dir("static")) // 创建一个能够为指定目录中的静态文件服务的处理器
 	mux.Handle("/", http.StripPrefix("/", files))//将上面的处理器给多路复用器handle函数
@@ -20,7 +23,7 @@ func Route()  {
 	//博文列表
 	mux.HandleFunc("/Blog/Index",controller.Index)
 	//博文添加
-	mux.HandleFunc("/Blog/Add",controller.Index)
+	mux.HandleFunc("/Blog/Add",controller.BlogIndex)
 	//博文修改
 	mux.HandleFunc("/Blog/Update",controller.Index)
 	//博文删除
@@ -42,3 +45,4 @@ func Route()  {
 	// 设置服务器监听请求端口
 	server.ListenAndServe()
 }
+
