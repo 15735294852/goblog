@@ -1,23 +1,23 @@
 package main
 
 import (
-	"fmt"
-	"goblog/model"
-	"goblog/model/blog"
 	"goblog/route"
-	"os"
 )
 
 
 func main() {
-	artcle := new(blog.Articles)
 
-	artcle.UserId = 0
-	artcle.Title = "第一篇文章"
-	articleId, _ := model.DB.Insert(artcle)
-
-	fmt.Println(articleId)
-	os.Exit(1)
+	//artcle := new(blog.Articles)
+	//res := artcle.List()
+	//fmt.Println(res)
+	//os.Exit(1)
+	//
+	//artcle.UserId = 0
+	//artcle.Title = "第一篇文章"
+	//articleId, _ := model.DB.Insert(artcle)
+	//
+	//fmt.Println(articleId)
+	//os.Exit(1)
 
 	//+++++++++获取配置相关 start +++++++++++++++++++//
 

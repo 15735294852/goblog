@@ -4,19 +4,14 @@ import (
 	"fmt"
 	"goblog/model/blog"
 	"net/http"
+	"strconv"
 )
 
-func Index(writer http.ResponseWriter, request *http.Request)  {
-	// 先写成这样,为了解决跨域
-	Cors(writer)
-
-	fmt.Println("2323")
-
+type BlogController struct {
+	BaseController
 }
 
-func BlogIndex(w http.ResponseWriter, request *http.Request) {
-	// 先写成这样,为了解决跨域
-	Cors(w)
+func (b *BlogController) Add(w http.ResponseWriter, request *http.Request) {
 	//参数
 	cont := request.PostFormValue("cont")
 	title := request.PostFormValue("title")
@@ -29,5 +24,20 @@ func BlogIndex(w http.ResponseWriter, request *http.Request) {
 
 	artcle.UserId = 0
 	//artcle.Title = "第一篇文章"
+}
 
+//博客列表 https://www.cnblogs.com/liuhe688/p/11063945.html
+func (b *BlogController) Index(w http.ResponseWriter, request *http.Request) {
+	page := request.PostFormValue("page")
+	size := request.PostFormValue("size")
+
+	//string转为int
+	pageInt,_ := strconv.Atoi(page)
+	sizeInt,_ := strconv.Atoi(size)
+
+	article := new(blog.Articles)
+	data := article.List(pageInt,sizeInt)
+
+	b.Response.Data = data
+	b.Success(w)
 }

@@ -19,14 +19,31 @@ func init() {
 	model.InitDB()
 }
 
+//插入博客
 func (article *Articles) Insert() int64 {
-	//o := orm.NewOrm()
-	//o.Using("online")
 	articleId, err := model.DB.Insert(article)
-	//articleId,err := o.Insert(artcle)
 	if err != nil {
 		log.Fatal("insert article err")
 	}
 
 	return articleId
+}
+
+
+//博客列表
+func (article *Articles) List(page int,size int) (articles []Articles){
+	offset := 2 * ( page - 1 )
+	qb, _ := orm.NewQueryBuilder("mysql")
+	qb.Select("id","user_id","title").
+		From("articles").
+		OrderBy("id").Desc().
+		Limit(size).Offset(offset)
+
+	// 导出SQL语句
+	sql := qb.String()
+
+	// 执行SQL语句
+	model.DB.Raw(sql).QueryRows(&articles)
+
+	return articles
 }
